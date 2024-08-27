@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { navList } from "../../utils/list";
-// import { HamburgerMenu } from "./HamburgerMenu";
 
 export const Navbar = () => {
   const [openNavigation, setOpenNavigation] = useState(false);
@@ -27,11 +26,21 @@ export const Navbar = () => {
     <div className="fixed z-50 top-1 left-1 right-1">
       <div
         className={`rounded-full w-full blur-4xl ${
-          openNavigation ? "bg-n-1" : "navbar-background"
+          openNavigation ? "bg-n-1" : ""
         }`}
       >
         <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-4">
-          <h1 className="block w-[8rem] font-bold text-xl">EcoChain</h1>
+          <h1
+            style={{
+              background: "linear-gradient(45deg, #2E7D32, #66BB6A, #A5D6A7)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+            className="block w-[8rem] font-bold text-xl"
+          >
+            EcoChain
+          </h1>
 
           <nav
             className={`${
@@ -41,6 +50,13 @@ export const Navbar = () => {
             <div className="relative z-2 flex flex-col items-center justify-center m-auto lg:flex-row">
               {navList.map((item, index) => (
                 <a
+                  style={{
+                    background:
+                      "linear-gradient(45deg, #2E7D32, #66BB6A, #A5D6A7)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}
                   key={index}
                   href={item.url}
                   onClick={handleClick}
@@ -50,23 +66,15 @@ export const Navbar = () => {
                 </a>
               ))}
             </div>
-
-            {/* <HamburgerMenu /> */}
           </nav>
 
-          <button 
-          style={{'backgroundColor': '#66BB6A'}}
-          className="rounded-full uppercase p-4 shadow-md duration-200 hover:scale-105 font-semibold text-sm">
+          <button
+            style={{ backgroundColor: "#66BB6A" }}
+            className="rounded-full uppercase p-4 shadow-md duration-200 hover:scale-105 font-semibold text-sm"
+          >
             Connect Wallet
           </button>
-
-          {/* <WalletMultiButton /> */}
-
-          <button
-            onClick={toggleNavigation}
-            className="ml-auto lg:hidden px-3"
-          ></button>
-
+          
           <button className="ml-auto lg:hidden px-3" onClick={toggleNavigation}>
             <svg
               className="overflow-visible"
