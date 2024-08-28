@@ -1,17 +1,17 @@
 import React from "react";
-import { NFTArt } from "../../utils/interface";
+import { WasteBank } from "../../utils/interface";
 import not_found from "../../assets/not_found.png";
-import { NFTArtCard } from "../card/NFTArtCard";
+import { WasteBankCard } from "../card/WasteBankCard";
 
-type NFTArtSectionProps = {
-  data: NFTArt[];
+type WasteBankSectionProps = {
+  data: WasteBank[];
 };
 
-export const NFTArtSection: React.FC<NFTArtSectionProps> = ({data}) => {
+export const WasteBankSection: React.FC<WasteBankSectionProps> = ({ data }) => {
   return (
     <div className="my-12">
       <div className="flex flex-row items-center space-x-4 mb-6">
-        <h1 className="font-bold text-3xl text-n-7">All NFT Art</h1>
+        <h1 className="font-bold text-3xl text-n-7">Waste Bank Location</h1>
       </div>
       {data.length == 0 ? (
         <div className="w-full flex items-center flex-col">
@@ -20,8 +20,8 @@ export const NFTArtSection: React.FC<NFTArtSectionProps> = ({data}) => {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-          {data.map((nftArt) => (
-            <NFTArtCard key={nftArt.id} data={nftArt} />
+          {data.map((wasteBank, index) => (
+            <WasteBankCard key={index} data={wasteBank} />
           ))}
         </div>
       )}

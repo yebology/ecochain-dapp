@@ -19,7 +19,7 @@ export const NFTArtCard: React.FC<NFTArtCardProps> = ({ data }) => {
           />
           <div className="absolute top-2 left-2 p-2 bg-white bg-opacity-80 rounded-lg shadow-md flex items-center">
             <FaCoins className="text-yellow-500 mr-1" />
-            <h5 className="text-gray-700 font-bold">$RCYCL {data.price}</h5>
+            <h5 className="text-gray-700 text-sm font-bold">$RCYCL {data.price}</h5>
           </div>
         </div>
 

@@ -19,9 +19,17 @@ export type NFTArt = {
 }
 
 export type WasteBank = {
-
+    wallet: string,
+    country: string,
+    city: string,
+    linkToMap: string
 }
 
 export type Transaction = {
-
+    wasteBankWallet: string,
+    user: string,
+    bottleWeightInKg: number,
+    paperWeightInKg: number,
+    canWeightInKg: number,
+    timestamp: number
 }

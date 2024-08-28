@@ -2,7 +2,7 @@ import efficiency from "../assets/efficiency.png";
 import security from "../assets/security.png";
 import sustainability from "../assets/sustainability.png";
 import reward from "../assets/reward.png";
-import { FAQ, NFTArt, Review } from "./interface";
+import { FAQ, NFTArt, Review, Transaction, WasteBank } from "./interface";
 
 export const navList = [
   {
@@ -147,5 +147,81 @@ export const nftArtList: NFTArt[] = [
     image:
       "https://img.freepik.com/free-vector/hand-drawn-nft-style-ape-illustration_23-2149611030.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1724716800&semt=ais_hybrid",
     price: 5.0,
+  },
+];
+
+export const wasteBanks: WasteBank[] = [
+  {
+      wallet: "0x123abc456def789ghi",
+      country: "Indonesia",
+      city: "Jakarta",
+      linkToMap: "https://goo.gl/maps/1"
+  },
+  {
+      wallet: "0x987zyx654wvu321tsr",
+      country: "USA",
+      city: "New York",
+      linkToMap: "https://goo.gl/maps/2"
+  },
+  {
+      wallet: "0x654mno321pqr098vwx",
+      country: "Germany",
+      city: "Berlin",
+      linkToMap: "https://goo.gl/maps/3"
+  },
+  {
+      wallet: "0xabc123def456ghi789",
+      country: "Japan",
+      city: "Tokyo",
+      linkToMap: "https://goo.gl/maps/4"
+  },
+  {
+      wallet: "0x456stu789vwx012yza",
+      country: "Brazil",
+      city: "Rio de Janeiro",
+      linkToMap: "https://goo.gl/maps/5"
+  }
+];
+
+export const transactions: Transaction[] = [
+  {
+    wasteBankWallet: "0x123abc456def789ghi",
+    user: "user1@example.com",
+    bottleWeightInKg: 5.5,
+    paperWeightInKg: 2.3,
+    canWeightInKg: 1.0,
+    timestamp: 1693190400, // Example Unix timestamp
+  },
+  {
+    wasteBankWallet: "0x987zyx654wvu321tsr",
+    user: "user2@example.com",
+    bottleWeightInKg: 3.2,
+    paperWeightInKg: 1.8,
+    canWeightInKg: 0.7,
+    timestamp: 1693190500, // Example Unix timestamp
+  },
+  {
+    wasteBankWallet: "0x987zyx654wvu321tsr",
+    user: "user3@example.com",
+    bottleWeightInKg: 6.0,
+    paperWeightInKg: 4.2,
+    canWeightInKg: 2.1,
+    timestamp: 1693190600, // Example Unix timestamp
+  },
+  {
+    wasteBankWallet: "0x456stu789vwx012yza",
+    user: "user4@example.com",
+    bottleWeightInKg: 4.8,
+    paperWeightInKg: 2.9,
+    canWeightInKg: 1.5,
+    timestamp: 1693190700, // Example Unix timestamp
+  },
+  {
+    wasteBankWallet: "0x456stu789vwx012yza",
+    user: "user5@example.com",
+    bottleWeightInKg: 7.3,
+    paperWeightInKg: 5.0,
+    canWeightInKg: 3.2,
+    timestamp: 1693190800, // Example Unix timestamp
   },
 ];

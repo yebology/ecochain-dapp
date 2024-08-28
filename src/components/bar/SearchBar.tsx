@@ -4,11 +4,13 @@ import { FaSearch } from "react-icons/fa";
 type SearchBarProps = {
   query: string;
   handleSearch: React.ChangeEventHandler<HTMLInputElement>;
+  message: string;
 };
 
 export const SearchBar: React.FC<SearchBarProps> = ({
   query,
   handleSearch,
+  message
 }) => {
   return (
     <div className="flex justify-end mt-2 mb-12">
@@ -17,7 +19,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         htmlFor="search-bar"
       >
         <input
-          placeholder={"Search NFT Art..."}
+          placeholder={message}
           className="text-n-5 flex items-center pl-4 py-2 rounded-full flex-1 outline-none bg-white"
           value={query}
           onChange={handleSearch}
