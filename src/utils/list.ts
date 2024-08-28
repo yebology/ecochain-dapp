@@ -2,7 +2,7 @@ import efficiency from "../assets/efficiency.png";
 import security from "../assets/security.png";
 import sustainability from "../assets/sustainability.png";
 import reward from "../assets/reward.png";
-import { FAQ, Review } from "./interface";
+import { FAQ, NFTArt, Review } from "./interface";
 
 export const navList = [
   {
@@ -97,5 +97,36 @@ export const reviewList: Review[] = [
       rating: 4.2,
       timestamp: 1693567200000,
       review: "Very satisfied with the purchase, would recommend."
+  }
+];
+
+export const nftArtList: NFTArt[] = [
+  {
+      id: 1,
+      name: "Ape Art #1",
+      description: "A unique hand-drawn NFT of an ape.",
+      image: "https://img.freepik.com/free-vector/hand-drawn-nft-style-ape-illustration_23-2149611030.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1724716800&semt=ais_hybrid",
+      price: 1.25
+  },
+  {
+      id: 2,
+      name: "Ape Art #2",
+      description: "An exclusive NFT featuring a stylized ape illustration.",
+      image: "https://img.freepik.com/free-vector/hand-drawn-nft-style-ape-illustration_23-2149611030.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1724716800&semt=ais_hybrid",
+      price: 2.50
+  },
+  {
+      id: 3,
+      name: "Ape Art #3",
+      description: "Collectible NFT with a hand-drawn ape design.",
+      image: "https://img.freepik.com/free-vector/hand-drawn-nft-style-ape-illustration_23-2149611030.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1724716800&semt=ais_hybrid",
+      price: 3.75
+  },
+  {
+      id: 4,
+      name: "Ape Art #4",
+      description: "Limited edition NFT of a unique ape illustration.",
+      image: "https://img.freepik.com/free-vector/hand-drawn-nft-style-ape-illustration_23-2149611030.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1724716800&semt=ais_hybrid",
+      price: 5.00
   }
 ];

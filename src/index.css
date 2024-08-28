@@ -44,3 +44,30 @@
   background-color: white;
   z-index: -1;
 }
+
+/* Animasi gradient */
+@keyframes rotateGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-border {
+  background: linear-gradient(90deg, #2E7D32, #66BB6A, #A5D6A7, #2E7D32);
+  background-size: 300% 300%;
+  animation: rotateGradient 5s linear infinite;
+  padding: 4px;
+  border-radius: 16px;
+}
+
+.inner-content {
+  background: white;
+  border-radius: 12px;
+}
+

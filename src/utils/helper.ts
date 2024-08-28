@@ -14,3 +14,45 @@ export function truncate(
   }
   return text;
 }
+
+export function timestampToDateConverter(timestamp: number) {
+  const date = new Date(timestamp * 1000);
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "June",
+    "July",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  const year = date.getFullYear();
+  const month = months[date.getMonth()];
+  const day = date.getDate().toString().padStart(2, "0");
+
+  const today = new Date();
+  const tomorrow = new Date();
+
+  tomorrow.setDate(today.getDate() + 1);
+  today.setHours(0, 0, 0, 0);
+  tomorrow.setHours(0, 0, 0, 0);
+  date.setHours(0, 0, 0, 0);
+
+  let dayLabel;
+  if (date.getTime() === today.getTime()) {
+    dayLabel = "Today";
+  } else if (date.getTime() == tomorrow.getTime()) {
+    dayLabel = "Tomorrow";
+  } else {
+    dayLabel = `${day} ${month} ${year}`;
+  }
+
+  const formatedDateTime = `${dayLabel}`;
+  return formatedDateTime;
+}
