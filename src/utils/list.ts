@@ -2,7 +2,7 @@ import efficiency from "../assets/efficiency.png";
 import security from "../assets/security.png";
 import sustainability from "../assets/sustainability.png";
 import reward from "../assets/reward.png";
-import { FAQ } from "./interface";
+import { FAQ, Review } from "./interface";
 
 export const navList = [
   {
@@ -64,5 +64,38 @@ export const faqList: FAQ[] = [
   {
     question: "Can I cancel my subscription anytime?",
     answer: "Yes, you can cancel your subscription at any time without any hidden fees. We believe in providing a hassle-free experience for our users."
+  }
+];
+
+export const reviewList: Review[] = [
+  {
+      reviewer: "Alice",
+      rating: 4.5,
+      timestamp: 1693221600000, // Representing a specific date in milliseconds
+      review: "Great product, really enjoyed using it!"
+  },
+  {
+      reviewer: "Bob",
+      rating: 3.8,
+      timestamp: 1693308000000,
+      review: "Good overall, but some features could be improved."
+  },
+  {
+      reviewer: "Charlie",
+      rating: 5.0,
+      timestamp: 1693394400000,
+      review: "Excellent! Exceeded my expectations in every way."
+  },
+  {
+      reviewer: "David",
+      rating: 2.7,
+      timestamp: 1693480800000,
+      review: "Not as good as I expected, had some issues."
+  },
+  {
+      reviewer: "Eve",
+      rating: 4.2,
+      timestamp: 1693567200000,
+      review: "Very satisfied with the purchase, would recommend."
   }
 ];

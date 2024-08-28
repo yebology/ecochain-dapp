@@ -3,7 +3,7 @@ import { whyUsList } from "../../utils/list";
 
 export const WhyUsSection = () => {
   return (
-    <div className="relative pt-32 md:py-12 xl:container m-auto px-6 md:px-12">
+    <div className="my-10 pt-16 relative px-6">
       <div className="absolute my-auto inset-0 w-96 h-44 bg-gradient-to-r from-[#2E7D32] via-[#66BB6A] to-[#A5D6A7] blur-3xl opacity-50"></div>
       <div className="absolute top-0 bottom-0 right-0 w-96 h-44 bg-gradient-to-r from-[#2E7D32] via-[#66BB6A] to-[#A5D6A7] blur-3xl opacity-50"></div>
       <div className="relative lg:flex lg:items-center lg:gap-36">
