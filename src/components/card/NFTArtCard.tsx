@@ -23,11 +23,11 @@ export const NFTArtCard: React.FC<NFTArtCardProps> = ({ data }) => {
           </div>
         </div>
 
-        <div className="p-4">
-          <h5 className="font-bold text-lg mb-2 text-gray-800">{data.name}</h5>
+        <div className="px-3 pt-2 pb-1 text-start">
+          <h5 className="font-bold text-md mb-2 text-gray-800">{data.name}</h5>
           <p className="text-sm text-gray-600">{data.description}</p>
         </div>
-        <div className="p-4">
+        <div className="p-3">
           <button
             style={{ backgroundColor: "#66BB6A" }}
             className="rounded-xl p-3 w-full"
