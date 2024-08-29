@@ -5,9 +5,10 @@ import { TiShoppingCart } from "react-icons/ti";
 
 type NFTArtCardProps = {
   data: NFTArt;
+  onPurchase: (tokenId: number) => void;
 };
 
-export const NFTArtCard: React.FC<NFTArtCardProps> = ({ data }) => {
+export const NFTArtCard: React.FC<NFTArtCardProps> = ({ data, onPurchase }) => {
   return (
     <div className="rounded-xl hover:scale-105 transform transition duration-500 shadow-lg cursor-pointer mr-4 mb-6 mt-4 h-auto gradient-border">
       <div className="inner-content rounded-lg overflow-hidden">
@@ -29,6 +30,7 @@ export const NFTArtCard: React.FC<NFTArtCardProps> = ({ data }) => {
         </div>
         <div className="p-3">
           <button
+          onClick={() => onPurchase(data.id)}
             style={{ backgroundColor: "#66BB6A" }}
             className="rounded-xl p-3 w-full"
           >

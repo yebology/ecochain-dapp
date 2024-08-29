@@ -4,23 +4,37 @@ import { HomeHeroSection } from "../components/section/HomeHeroSection";
 import { ReviewSection } from "../components/section/ReviewSection";
 import { WhyUsSection } from "../components/section/WhyUsSection";
 import { ReviewModal } from "../components/modal/ReviewModal";
+import { ReusableModal } from "../components/modal/ReusableModal";
 
 export const Home = () => {
   const [rating, setRating] = useState("");
   const [review, setReview] = useState("");
-  const [open, setOpen] = useState(false);
+  const [openReview, setOpenReview] = useState(false);
+  const [openError, setOpenError] = useState(false);
+  const [openSuccess, setOpenSuccess] = useState(false);
 
   const onSubmit = () => {
-    onClose();
+    onCloseReview();
+    validateInput();
     onReset();
   };
 
-  const onOpen = () => {
-    setOpen(true);
+  const validateInput = () => {
+    const convertedRating = parseInt(rating);
+    if (convertedRating < 1 || convertedRating > 5 || review == "") {
+      setOpenError(true);
+    } else {
+      // logic
+      setOpenSuccess(true);
+    }
   };
 
-  const onClose = () => {
-    setOpen(false);
+  const onOpenReview = () => {
+    setOpenReview(true);
+  };
+
+  const onCloseReview = () => {
+    setOpenReview(false);
   };
 
   const onReviewChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -34,31 +48,53 @@ export const Home = () => {
   const onReset = () => {
     setRating("");
     setReview("");
-    setOpen(false);
+    setOpenReview(false);
+  };
+
+  const onCloseSuccess = () => {
+    setOpenSuccess(false);
+  };
+
+  const onCloseError = () => {
+    setOpenError(false);
   };
 
   return (
     <div className="relative mt-16">
-      <div
-        className={`transition-opacity duration-500 ${
-          open ? "opacity-90" : "opacity-100"
-        }`}
-      >
         <HomeHeroSection />
         <WhyUsSection />
-        <ReviewSection onOpen={onOpen} />
+        <ReviewSection onOpen={onOpenReview} />
         <FAQSection />
-        {open && (
+        {openReview && (
           <ReviewModal
             rating={rating}
             review={review}
             onReviewChange={onReviewChange}
             onRatingChange={onRatingChange}
-            onClose={onClose}
+            onClose={onCloseReview}
             onSubmit={onSubmit}
           />
         )}
-      </div>
+        {openError && (
+          <ReusableModal
+            onClose={onCloseError}
+            message={"ErrorModal"}
+            header={"Something Went Wrong!"}
+            content={
+              "We encountered an issue. Please double-check your input and try again."
+            }
+          />
+        )}
+        {openSuccess && (
+          <ReusableModal
+            onClose={onCloseSuccess}
+            message={"SuccessModal"}
+            header={"Thank You!"}
+            content={
+              "Your review has been submitted successfully. We appreciate your feedback!"
+            }
+          />
+        )}
     </div>
   );
 };

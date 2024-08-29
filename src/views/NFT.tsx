@@ -2,11 +2,53 @@ import { useEffect, useState } from "react";
 import { SearchBar } from "../components/bar/SearchBar";
 import { nftArtList } from "../utils/list";
 import { NFTArt } from "../utils/interface";
-import { NFTArtSection } from "../components/section/NFTArtSection";
+import { NFTArtCard } from "../components/card/NFTArtCard";
+import { PurchaseConfirmationModal } from "../components/modal/PurchaseConfirmationModal";
+import { ReusableModal } from "../components/modal/ReusableModal";
+import not_found from "../assets/not_found.png";
 
 export const NFT = () => {
   const [query, setQuery] = useState("");
   const [filteredNFTArt, setFilteredNFTArt] = useState<NFTArt[]>([]);
+
+  const [openConfirmation, setOpenConfirmation] = useState(false);
+  const [openSuccess, setOpenSuccess] = useState(false);
+  const [openInsufficient, setOpenInsufficient] = useState(false);
+  const [choosenIndex, setChoosenIndex] = useState(0);
+
+  const onClick = (tokenId: number) => {
+    setOpenConfirmation(true);
+    setChoosenIndex(tokenId);
+  };
+
+  const onCloseConfirmation = () => {
+    setOpenConfirmation(false);
+  };
+
+  const onPurchaseConfirmation = () => {
+    // user balance
+    if (100 < nftArtList[choosenIndex].price) {
+      setOpenConfirmation(false);
+      setOpenInsufficient(true);
+    } else {
+      // logic
+      setOpenConfirmation(false);
+      setOpenSuccess(true);
+      setChoosenIndex(0);
+    }
+  };
+
+  const onCloseInsufficient = () => {
+    setOpenInsufficient(false);
+  };
+
+  const onCloseSuccess = () => {
+    setOpenSuccess(false);
+  };
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+  };
 
   useEffect(() => {
     if (nftArtList) {
@@ -16,10 +58,6 @@ export const NFT = () => {
       setFilteredNFTArt(filteredData);
     }
   }, [query]);
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
-  };
 
   return (
     <div className="relative mt-28 md:-mx-2.5">
@@ -39,7 +77,48 @@ export const NFT = () => {
           message={"Search NFT Art..."}
         />
       </div>
-      <NFTArtSection data={filteredNFTArt} />
+
+      <div className="my-12">
+        <div className="flex flex-row items-center space-x-4 mb-6">
+          <h1 className="font-bold text-3xl text-n-7">All NFT Art</h1>
+        </div>
+        {filteredNFTArt.length == 0 ? (
+          <div className="w-full flex items-center flex-col">
+            <img src={not_found} alt="Not Found" className="size-80" />
+            <h1 className="text-n-7 font-bold text-3xl"> Data Not Found! </h1>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+            {filteredNFTArt.map((nftArt) => (
+              <NFTArtCard key={nftArt.id} data={nftArt} onPurchase={onClick} />
+            ))}
+          </div>
+        )}
+      </div>
+      {openConfirmation && (
+        <PurchaseConfirmationModal
+          onClose={onCloseConfirmation}
+          onSubmit={onPurchaseConfirmation}
+          header={`Confirm purchase of ${nftArtList[choosenIndex].name} NFT?`}
+          content={`This will cost $RCYCL${nftArtList[choosenIndex].price}. Continue?`}
+        />
+      )}
+      {openSuccess && (
+        <ReusableModal
+          onClose={onCloseSuccess}
+          message={"SuccessModal"}
+          header={"Purchase Complete!"}
+          content={"Your item is now yours!"}
+        />
+      )}
+      {openInsufficient && (
+        <ReusableModal
+          onClose={onCloseInsufficient}
+          message={"InsufficientModal"}
+          header={"Insufficient Balance"}
+          content={"You do not have enough $RCYCL to complete this purchase."}
+        />
+      )}
     </div>
   );
 };
