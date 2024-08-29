@@ -70,7 +70,7 @@ export const Navbar = () => {
 
           <button
             style={{ backgroundColor: "#66BB6A" }}
-            className="rounded-full uppercase p-4 shadow-md duration-200 hover:scale-105 font-semibold text-sm"
+            className="rounded-xl uppercase p-4 shadow-md duration-200 hover:scale-105 font-semibold text-sm"
           >
             Connect Wallet
           </button>

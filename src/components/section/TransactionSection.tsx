@@ -21,7 +21,7 @@ export const TransactionSection: React.FC<TransactionSectionProps> = ({
           <h1 className="text-n-7 font-bold text-3xl"> No Transaction Yet! </h1>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full">
+        <div className="flex flex-col w-full">
           {data.map((transaction, index) => (
             <TransactionCard key={index} data={transaction} />
           ))}

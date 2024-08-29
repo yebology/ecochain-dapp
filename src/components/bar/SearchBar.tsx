@@ -13,9 +13,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   message
 }) => {
   return (
-    <div className="flex justify-end mt-2 mb-12">
+    <div className="flex justify-end">
       <label
-        className="bg-white flex border py-2 px-2 rounded-full focus-within:border-gray-300"
+        className="bg-white flex border py-2 px-2 rounded-xl focus-within:border-gray-300"
         htmlFor="search-bar"
       >
         <input

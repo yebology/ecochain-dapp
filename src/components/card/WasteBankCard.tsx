@@ -1,12 +1,23 @@
 import React from "react";
 import { WasteBank } from "../../utils/interface";
-import { FaMapMarkerAlt, FaRegFlag, FaWallet } from "react-icons/fa";
+import { FaCopy, FaMapMarkerAlt, FaRegFlag, FaWallet } from "react-icons/fa";
+import { truncate } from "../../utils/helper";
 
 type WasteBankCardProps = {
   data: WasteBank;
 };
 
 export const WasteBankCard: React.FC<WasteBankCardProps> = ({ data }) => {
+
+  const handleCopy = (wallet : string) => {
+    try {
+      navigator.clipboard.writeText(wallet)
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+  
   return (
     <div className="rounded-xl hover:scale-105 transform transition duration-500 shadow-lg cursor-pointer mr-4 mb-6 mt-4 h-auto gradient-border">
       <div className="inner-content rounded-lg overflow-hidden">
@@ -41,7 +52,8 @@ export const WasteBankCard: React.FC<WasteBankCardProps> = ({ data }) => {
           </div>
           <div className="flex items-center text-gray-600">
             <FaWallet className="mr-3 text-purple-500" />
-            <span className="truncate">{data.wallet}</span>
+            <span className="">{truncate(data.wallet, 4, 4, 11)}</span>
+            <FaCopy onClick={() => handleCopy(data.wallet)} className="text-gray-500 ml-2" />
           </div>
         </div>
       </div>

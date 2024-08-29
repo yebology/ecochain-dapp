@@ -1,11 +1,15 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { reviewList } from "../../utils/list";
 import { ReviewCard } from "../card/ReviewCard";
 
-export const ReviewSection = () => {
+type ReviewSectionProps = {
+  onOpen: () => void;
+};
+
+export const ReviewSection: React.FC<ReviewSectionProps> = ({ onOpen }) => {
   const [expandedIndex, setExpandedIndex] = useState(null);
   const toggleExpand = (index: any) => {
     setExpandedIndex(expandedIndex === index ? null : index);
@@ -120,8 +124,9 @@ export const ReviewSection = () => {
             about us.
           </p>
           <button
+            onClick={onOpen}
             style={{ backgroundColor: "#66BB6A" }}
-            className="hover:scale-105 duration-200 text-white font-normal rounded-full p-3 shadow-md"
+            className="uppercase hover:scale-105 duration-200 text-white font-semibold rounded-xl p-3 shadow-md"
           >
             Add Yours
           </button>
