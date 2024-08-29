@@ -135,7 +135,7 @@ export const nftArtList: NFTArt[] = [
   {
     id: 4,
     name: "Gallen Eldergrove",
-    description: "A valiant forest prince with flowing green hair and sharp, mysterious eyes.",
+    description: "A valiant forest prince with flowing green hair and sharp, mysterious emerald eyes.",
     image:
       "https://img.freepik.com/free-vector/hand-drawn-nft-style-ape-illustration_23-2149611030.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1724716800&semt=ais_hybrid",
     price: 5.0,

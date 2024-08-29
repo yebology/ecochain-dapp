@@ -68,7 +68,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
           <button
             onClick={onSubmit}
             style={{ backgroundColor: "#66BB6A" }}
-            className="duration-200 uppercase hover:scale-105 w-full font-bold shadow-sm rounded-xl p-3 text-white flex items-center justify-center"
+            className="duration-200 hover:scale-105 w-full font-bold shadow-sm rounded-xl p-3 text-white flex items-center justify-center"
           >
             <span>Submit</span>
           </button>

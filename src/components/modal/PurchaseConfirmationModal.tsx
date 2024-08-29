@@ -31,13 +31,13 @@ export const PurchaseConfirmationModal: React.FC<
         <button
           onClick={onSubmit}
           style={{ backgroundColor: "#66BB6A" }}
-          className="uppercase inline-block w-full px-6 py-2.5 mt-5 text-white font-medium rounded-lg hover:scale-105 duration-200 shadow-md"
+          className="inline-block w-full px-6 py-2.5 mt-5 text-white font-medium rounded-lg hover:scale-105 duration-200 shadow-md"
         >
           Confirm
         </button>
           <button
             onClick={onClose}
-            className="uppercase bg-red-500 inline-block w-full px-6 py-2.5 mt-5 text-white font-medium rounded-lg hover:scale-105 duration-200 shadow-md"
+            className="bg-red-500 inline-block w-full px-6 py-2.5 mt-5 text-white font-medium rounded-lg hover:scale-105 duration-200 shadow-md"
           >
             Cancel
           </button>

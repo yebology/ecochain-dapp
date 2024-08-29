@@ -6,7 +6,10 @@ import { WhyUsSection } from "../components/section/WhyUsSection";
 import { ReviewModal } from "../components/modal/ReviewModal";
 import { ReusableModal } from "../components/modal/ReusableModal";
 
-export const Home = () => {
+type HomeProps = {
+  account: string;
+}
+export const Home :React.FC<HomeProps> = ({ account }) => {
   const [rating, setRating] = useState("");
   const [review, setReview] = useState("");
   const [openReview, setOpenReview] = useState(false);
@@ -30,7 +33,9 @@ export const Home = () => {
   };
 
   const onOpenReview = () => {
-    setOpenReview(true);
+    if (account) {
+      setOpenReview(true);
+    }
   };
 
   const onCloseReview = () => {

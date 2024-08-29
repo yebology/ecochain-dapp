@@ -126,7 +126,7 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({ onOpen }) => {
           <button
             onClick={onOpen}
             style={{ backgroundColor: "#66BB6A" }}
-            className="uppercase hover:scale-105 duration-200 text-white font-semibold rounded-xl p-3 shadow-md"
+            className="hover:scale-105 duration-200 text-white font-semibold rounded-xl p-3 shadow-md"
           >
             Add Yours
           </button>

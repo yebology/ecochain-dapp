@@ -9,7 +9,7 @@ export const FAQSection = () => {
   };
 
   return (
-    <div className="relative mt-10 mb-20 pt-32">
+    <div className="relative mt-10 mb-20 pt-32 mx-10">
       <div className="absolute bottom-0 w-96 h-44 bg-gradient-to-r from-[#2E7D32] via-[#66BB6A] to-[#A5D6A7] blur-3xl opacity-50"></div>
       <div className="absolute top-1/4 bottom-0 right-0 w-96 h-44 bg-gradient-to-r from-[#2E7D32] via-[#66BB6A] to-[#A5D6A7] blur-3xl opacity-50"></div>
       <div className="flex flex-col text-n-8 lg:px-44">
