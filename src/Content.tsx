@@ -27,14 +27,14 @@ export const Content = () => {
   return (
     <div>
       <Navbar onConnect={onConnect} account={account} />
-      <Routes>
-        <Route path="/" element={<Home account={account} />} />
-        <Route path="/nft" element={<NFT account={account}/>} />
-        <Route path="/waste_bank" element={<WasteBankView />} />
-        <Route path="/transaction" element={<TransactionView />} />
-      </Routes>
-      <Footer />
-      <LoadingModal />
+        <Routes>
+          <Route path="/" element={<Home account={account} />} />
+          <Route path="/nft" element={<NFT account={account} />} />
+          <Route path="/waste_bank" element={<WasteBankView />} />
+          <Route path="/transaction" element={<TransactionView account={account} />} />
+        </Routes>
+        <Footer />
+        <LoadingModal />
     </div>
   );
 };
