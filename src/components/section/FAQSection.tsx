@@ -1,7 +1,11 @@
-import { useState } from "react";
-import { faqList } from "../../utils/list";
+import React, { useState } from "react";
+import { FAQ } from "../../utils/interface";
 
-export const FAQSection = () => {
+type FAQSectionProps = {
+  data: FAQ[];
+};
+
+export const FAQSection: React.FC<FAQSectionProps> = ({ data }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const handleClick = (index: number) => {
@@ -67,7 +71,7 @@ export const FAQSection = () => {
         </h5>
       </div>
       <div className="grid md:grid-cols-1 gap-4 mt-10">
-        {faqList.map((faq, index) => (
+        {data.map((faq, index) => (
           <div
             key={index}
             className="transition-all duration-200 bg-white border border-green-500 rounded-xl shadow-lg cursor-pointer hover:bg-gray-50"

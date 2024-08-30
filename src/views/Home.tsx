@@ -5,9 +5,10 @@ import { ReviewSection } from "../components/section/ReviewSection";
 import { WhyUsSection } from "../components/section/WhyUsSection";
 import { ReviewModal } from "../components/modal/ReviewModal";
 import { ReusableModal } from "../components/modal/ReusableModal";
-import { Review } from "../utils/interface";
+import { FAQ, Review } from "../utils/interface";
 import { getReviews, giveReview } from "../services/review";
 import { setGlobalState } from "../utils/global";
+import { getFAQs } from "../services/faq";
 
 type HomeProps = {
   account: string;
@@ -20,6 +21,7 @@ export const Home: React.FC<HomeProps> = ({ account }) => {
   const [openError, setOpenError] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
   const [reviewData, setReviewData] = useState<Review[]>([]);
+  const [faqsData, setFaqsData] = useState<FAQ[]>([]);
   const [trigger, setTrigger] = useState(false);
 
   const onSubmit = async () => {
@@ -104,6 +106,19 @@ export const Home: React.FC<HomeProps> = ({ account }) => {
     fetchData();
   }, [trigger]);
 
+  useEffect(() => {
+    const fetchData = async() => {
+      try {
+        const data = await getFAQs();
+        setFaqsData(data);
+      }
+      catch (error) {
+        console.log(error)
+      }
+    }
+    fetchData();
+  }, [])
+
   return (
     <div className="relative mt-16">
       <HomeHeroSection />
@@ -113,7 +128,7 @@ export const Home: React.FC<HomeProps> = ({ account }) => {
         data={reviewData}
         account={account}
       />
-      <FAQSection />
+      <FAQSection data={faqsData} />
       {openReview && (
         <ReviewModal
           rating={rating}
