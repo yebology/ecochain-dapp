@@ -1,0 +1,400 @@
+[
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_creator", "type": "address" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  { "inputs": [], "name": "InsufficientBalance", "type": "error" },
+  { "inputs": [], "name": "InvalidFAQData", "type": "error" },
+  { "inputs": [], "name": "InvalidNFTArtData", "type": "error" },
+  { "inputs": [], "name": "InvalidReviewData", "type": "error" },
+  { "inputs": [], "name": "InvalidTransactionData", "type": "error" },
+  { "inputs": [], "name": "InvalidWasteBankData", "type": "error" },
+  { "inputs": [], "name": "InvalidWasteBankWallet", "type": "error" },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
+    ],
+    "name": "NFTArtAlreadyBought",
+    "type": "error"
+  },
+  { "inputs": [], "name": "NonExistingNFTArt", "type": "error" },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "owner", "type": "address" }
+    ],
+    "name": "OwnableInvalidOwner",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "OwnableUnauthorizedAccount",
+    "type": "error"
+  },
+  { "inputs": [], "name": "ReentrancyGuardReentrantCall", "type": "error" },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "wallet", "type": "address" }
+    ],
+    "name": "WalletAlreadyRegistered",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "question",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "answer",
+        "type": "string"
+      }
+    ],
+    "name": "FAQAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      }
+    ],
+    "name": "NFTMinted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "NFTPurchased",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "ReviewCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "wasteBankWallet",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "TransactionCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "linkToMap",
+        "type": "string"
+      }
+    ],
+    "name": "WasteBankRegistered",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "_question", "type": "string" },
+      { "internalType": "string", "name": "_answer", "type": "string" }
+    ],
+    "name": "addNewFAQ",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_user", "type": "address" },
+      {
+        "internalType": "uint256",
+        "name": "_bottleWeightInKg",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_paperWeightInKg",
+        "type": "uint256"
+      },
+      { "internalType": "uint256", "name": "_canWeightInKg", "type": "uint256" }
+    ],
+    "name": "createTransaction",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getFAQs",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "string", "name": "question", "type": "string" },
+          { "internalType": "string", "name": "answer", "type": "string" }
+        ],
+        "internalType": "struct EcoChain.FAQ[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getNFTAddress",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getNFTArts",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "id", "type": "uint256" },
+          { "internalType": "string", "name": "name", "type": "string" },
+          { "internalType": "string", "name": "description", "type": "string" },
+          { "internalType": "string", "name": "image", "type": "string" },
+          { "internalType": "uint256", "name": "price", "type": "uint256" },
+          { "internalType": "bool", "name": "isBought", "type": "bool" }
+        ],
+        "internalType": "struct EcoChain.NFTArt[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getOwner",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getReviews",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "reviewer", "type": "address" },
+          { "internalType": "uint256", "name": "rating", "type": "uint256" },
+          { "internalType": "uint256", "name": "timestamp", "type": "uint256" },
+          { "internalType": "string", "name": "review", "type": "string" }
+        ],
+        "internalType": "struct EcoChain.Review[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getTokenAddress",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getTransactions",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "wasteBankWallet",
+            "type": "address"
+          },
+          { "internalType": "address", "name": "user", "type": "address" },
+          {
+            "internalType": "uint256",
+            "name": "bottleWeightInKg",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "paperWeightInKg",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "canWeightInKg",
+            "type": "uint256"
+          },
+          { "internalType": "uint256", "name": "timestamp", "type": "uint256" }
+        ],
+        "internalType": "struct EcoChain.Transaction[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_user", "type": "address" }
+    ],
+    "name": "getUserBalance",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getWasteBanks",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "wallet", "type": "address" },
+          { "internalType": "string", "name": "country", "type": "string" },
+          { "internalType": "string", "name": "city", "type": "string" },
+          { "internalType": "string", "name": "linkToMap", "type": "string" }
+        ],
+        "internalType": "struct EcoChain.WasteBank[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "_review", "type": "string" },
+      { "internalType": "uint8", "name": "_rating", "type": "uint8" }
+    ],
+    "name": "giveReview",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "_name", "type": "string" },
+      { "internalType": "string", "name": "_description", "type": "string" },
+      { "internalType": "uint256", "name": "_price", "type": "uint256" },
+      { "internalType": "string", "name": "_calldata", "type": "string" }
+    ],
+    "name": "mintNewNFT",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "_country", "type": "string" },
+      { "internalType": "string", "name": "_city", "type": "string" },
+      { "internalType": "string", "name": "_linkToMap", "type": "string" },
+      { "internalType": "address", "name": "_wallet", "type": "address" }
+    ],
+    "name": "registerWasteBank",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_tokenId", "type": "uint256" }
+    ],
+    "name": "swapTokenWithNFT",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "newOwner", "type": "address" }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

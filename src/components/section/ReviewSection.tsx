@@ -2,14 +2,20 @@ import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { reviewList } from "../../utils/list";
 import { ReviewCard } from "../card/ReviewCard";
+import { Review } from "../../utils/interface";
 
 type ReviewSectionProps = {
   onOpen: () => void;
+  data: Review[];
+  account: string;
 };
 
-export const ReviewSection: React.FC<ReviewSectionProps> = ({ onOpen }) => {
+export const ReviewSection: React.FC<ReviewSectionProps> = ({
+  onOpen,
+  data,
+  account,
+}) => {
   const [expandedIndex, setExpandedIndex] = useState(null);
   const toggleExpand = (index: any) => {
     setExpandedIndex(expandedIndex === index ? null : index);
@@ -123,24 +129,26 @@ export const ReviewSection: React.FC<ReviewSectionProps> = ({ onOpen }) => {
             </span>{" "}
             about us.
           </p>
-          <button
-            onClick={onOpen}
-            style={{ backgroundColor: "#66BB6A" }}
-            className="hover:scale-105 duration-200 text-white font-semibold rounded-xl p-3 shadow-md"
-          >
-            Add Yours
-          </button>
+          {account && (
+            <button
+              onClick={onOpen}
+              style={{ backgroundColor: "#66BB6A" }}
+              className="hover:scale-105 duration-200 text-white font-semibold rounded-xl p-3 shadow-md"
+            >
+              Add Yours
+            </button>
+          )}
         </div>
         <div
           className={`mt-6 slider-container ${
-            reviewList == null ? "scale-0" : "scale-100"
+            data == null ? "scale-0" : "scale-100"
           }`}
         >
           <Slider ref={sliderRef} {...settings}>
-            {reviewList == null ? (
+            {data == null ? (
               <div></div>
             ) : (
-              reviewList.map((review, index) => (
+              data.map((review, index) => (
                 <ReviewCard
                   key={index}
                   id={index}

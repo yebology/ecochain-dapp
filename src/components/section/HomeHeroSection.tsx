@@ -2,8 +2,8 @@ import trash from "../../assets/trash.png";
 
 export const HomeHeroSection = () => {
   return (
-    <div className="pt-32 md:py-12 xl:container m-auto px-6 md:px-12 my-10">
-      <div className="absolute inset-0 my-auto w-96 h-44 bg-gradient-to-r from-[#2E7D32] via-[#66BB6A] to-[#A5D6A7] blur-3xl opacity-50"></div>
+    <div className="pt-32 md:py-12 xl:container px-6 md:px-12 my-10">
+      <div className="absolute inset-0 w-96 h-44 bg-gradient-to-r from-[#2E7D32] via-[#66BB6A] to-[#A5D6A7] blur-3xl opacity-50 my-32"></div>
       <div className="absolute top-0 bottom-0 right-0 w-96 h-44 bg-gradient-to-r from-[#2E7D32] via-[#66BB6A] to-[#A5D6A7] blur-3xl opacity-50"></div>
       <div className="relative lg:flex lg:items-center lg:gap-36">
         <div className="text-center lg:text-left md:mt-12 lg:mt-0 sm:w-10/12 md:w-2/3 sm:mx-auto lg:mr-auto lg:w-6/12">

@@ -1,45 +1,73 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FAQSection } from "../components/section/FAQSection";
 import { HomeHeroSection } from "../components/section/HomeHeroSection";
 import { ReviewSection } from "../components/section/ReviewSection";
 import { WhyUsSection } from "../components/section/WhyUsSection";
 import { ReviewModal } from "../components/modal/ReviewModal";
 import { ReusableModal } from "../components/modal/ReusableModal";
+import { Review } from "../utils/interface";
+import { getReviews, giveReview } from "../services/review";
+import { setGlobalState } from "../utils/global";
 
 type HomeProps = {
   account: string;
-}
-export const Home :React.FC<HomeProps> = ({ account }) => {
+};
+
+export const Home: React.FC<HomeProps> = ({ account }) => {
   const [rating, setRating] = useState("");
   const [review, setReview] = useState("");
   const [openReview, setOpenReview] = useState(false);
   const [openError, setOpenError] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
+  const [reviewData, setReviewData] = useState<Review[]>([]);
+  const [trigger, setTrigger] = useState(false);
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     onCloseReview();
-    validateInput();
+    await validateInput();
     onReset();
   };
 
-  const validateInput = () => {
+  const validateInput = async () => {
+    setGlobalState("loadingModal", "scale-100")
     const convertedRating = parseInt(rating);
-    if (convertedRating < 1 || convertedRating > 5 || review == "") {
+    if (
+      convertedRating < 1 ||
+      convertedRating > 5 ||
+      review == "" ||
+      rating == ""
+    ) {
+      setGlobalState("loadingModal", "scale-0")
       setOpenError(true);
-    } else {
-      // logic
-      setOpenSuccess(true);
+    } 
+    else {
+      try {
+        const transaction = await giveReview(review, convertedRating);
+        const transactionReceipt = await transaction.wait();
+        console.log(transactionReceipt.hash);
+        setTrigger(true);
+        setGlobalState("loadingModal", "scale-0")
+        setOpenSuccess(true);
+      } 
+      catch (error) {
+        console.log(error);
+        setGlobalState("loadingModal", "scale-0")
+        setOpenError(true);
+      } 
     }
   };
 
   const onOpenReview = () => {
     if (account) {
       setOpenReview(true);
+      console.log("bbb");
     }
   };
 
   const onCloseReview = () => {
     setOpenReview(false);
+    console.log("aaaaa");
+    console.log(openReview);
   };
 
   const onReviewChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -64,42 +92,58 @@ export const Home :React.FC<HomeProps> = ({ account }) => {
     setOpenError(false);
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getReviews();
+        setReviewData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [trigger]);
+
   return (
     <div className="relative mt-16">
-        <HomeHeroSection />
-        <WhyUsSection />
-        <ReviewSection onOpen={onOpenReview} />
-        <FAQSection />
-        {openReview && (
-          <ReviewModal
-            rating={rating}
-            review={review}
-            onReviewChange={onReviewChange}
-            onRatingChange={onRatingChange}
-            onClose={onCloseReview}
-            onSubmit={onSubmit}
-          />
-        )}
-        {openError && (
-          <ReusableModal
-            onClose={onCloseError}
-            message={"ErrorModal"}
-            header={"Something Went Wrong!"}
-            content={
-              "We encountered an issue. Please double-check your input and try again."
-            }
-          />
-        )}
-        {openSuccess && (
-          <ReusableModal
-            onClose={onCloseSuccess}
-            message={"SuccessModal"}
-            header={"Thank You!"}
-            content={
-              "Your review has been submitted successfully. We appreciate your feedback!"
-            }
-          />
-        )}
+      <HomeHeroSection />
+      <WhyUsSection />
+      <ReviewSection
+        onOpen={onOpenReview}
+        data={reviewData}
+        account={account}
+      />
+      <FAQSection />
+      {openReview && (
+        <ReviewModal
+          rating={rating}
+          review={review}
+          onReviewChange={onReviewChange}
+          onRatingChange={onRatingChange}
+          onClose={onCloseReview}
+          onSubmit={onSubmit}
+        />
+      )}
+      {openError && (
+        <ReusableModal
+          onClose={onCloseError}
+          message={"ErrorModal"}
+          header={"Something Went Wrong!"}
+          content={
+            "We encountered an issue. Please double-check your input and try again."
+          }
+        />
+      )}
+      {openSuccess && (
+        <ReusableModal
+          onClose={onCloseSuccess}
+          message={"SuccessModal"}
+          header={"Thank You!"}
+          content={
+            "Your review has been submitted successfully. We appreciate your feedback!"
+          }
+        />
+      )}
     </div>
   );
 };

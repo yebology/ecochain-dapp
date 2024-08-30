@@ -7,7 +7,7 @@ export async function getFAQs() {
 async function loadFAQs() {
   try {
     const contract = await getContractWithoutSigner();
-    const faqs = contract.getFAQs();
+    const faqs = await contract.getFAQs();
     return structuredFAQs(faqs);
   } catch (error) {
     console.log(error);

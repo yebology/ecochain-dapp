@@ -6,7 +6,8 @@ import { NFT } from "./views/NFT";
 import { WasteBankView } from "./views/WasteBankView";
 import { TransactionView } from "./views/TransactionView";
 import { useEffect, useState } from "react";
-import { connectWallet } from "./services/blockchain";
+import { connectWallet } from "./services/wallet.ts";
+import { LoadingModal } from "./components/modal/LoadingModal.tsx";
 
 export const Content = () => {
   const [account, setAccount] = useState("");
@@ -33,6 +34,7 @@ export const Content = () => {
         <Route path="/transaction" element={<TransactionView />} />
       </Routes>
       <Footer />
+      <LoadingModal />
     </div>
   );
 };

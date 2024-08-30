@@ -5,7 +5,7 @@ import loading from "../../assets/loading.gif";
 import insufficient from "../../assets/insufficient.png";
 
 type ReusableModalProps = {
-  onClose: () => void;
+  onClose?: () => void;
   message: string;
   header: string;
   content: string;

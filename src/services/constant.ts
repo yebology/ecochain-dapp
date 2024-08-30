@@ -3,7 +3,7 @@ import contractAbi from "../abi/abi.json";
 
 const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS;
 const contractNetwork = import.meta.env.VITE_NETWORK;
-const contractApiKey = import.meta.env.VITE_API_KEY;
+const contractApiKey = import.meta.env.VITE_RPC_KEY;
 
 export async function getContractWithSigner() {
   const provider = new ethers.BrowserProvider((window as any).ethereum);
