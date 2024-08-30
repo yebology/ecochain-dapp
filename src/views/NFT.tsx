@@ -6,10 +6,16 @@ import { NFTArtCard } from "../components/card/NFTArtCard";
 import { PurchaseConfirmationModal } from "../components/modal/PurchaseConfirmationModal";
 import { ReusableModal } from "../components/modal/ReusableModal";
 import not_found from "../assets/not_found.png";
+import { getUserBalance } from "../services/balance";
 
-export const NFT = () => {
+type NFTProps = {
+  account: string
+}
+
+export const NFT : React.FC<NFTProps> = ({ account }) => {
   const [query, setQuery] = useState("");
   const [filteredNFTArt, setFilteredNFTArt] = useState<NFTArt[]>([]);
+  const [userBalance, setUserBalance] = useState(0)
 
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
@@ -59,6 +65,18 @@ export const NFT = () => {
     }
   }, [query]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getUserBalance(account);
+        setUserBalance(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [account]);
+
   return (
     <div className="relative mt-28 md:mx-10">
       <div className="absolute top-0 bottom-0 right-0 my-auto w-96 h-44 bg-gradient-to-r from-[#2E7D32] via-[#66BB6A] to-[#A5D6A7] blur-3xl opacity-50"></div>
@@ -69,7 +87,7 @@ export const NFT = () => {
           className="text-white px-5 py-3 rounded-lg shadow-md"
         >
           <span className="font-medium text-sm">Balance :</span>
-          <span className="font-semibold text-lg"> $RCYCL {100}</span>
+          <span className="font-semibold text-lg"> $RCYCL {userBalance}</span>
         </div>
         <SearchBar
           query={query}

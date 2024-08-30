@@ -33,6 +33,7 @@ function structuredNFTArts(nftArts: any) {
     description: nftArt.description,
     image: nftArt.image,
     price: nftArt.price,
+    isBought: nftArt.isBought
   }));
   return nftArtList;
 }

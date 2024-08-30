@@ -29,7 +29,7 @@ export const Content = () => {
       <Navbar onConnect={onConnect} account={account} />
       <Routes>
         <Route path="/" element={<Home account={account} />} />
-        <Route path="/nft" element={<NFT />} />
+        <Route path="/nft" element={<NFT account={account}/>} />
         <Route path="/waste_bank" element={<WasteBankView />} />
         <Route path="/transaction" element={<TransactionView />} />
       </Routes>
