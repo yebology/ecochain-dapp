@@ -42,7 +42,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
                 type="number"
                 placeholder="Input your Rating (1-5)"
                 min={1}
-                step={0.1}
+                step={1}
                 max={5}
                 onChange={(e) => onRatingChange(e)}
                 value={rating}

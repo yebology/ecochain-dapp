@@ -19,10 +19,10 @@ function structuredTransactions(transactions: any) {
   const transactionList = transactions.map((transaction: any) => ({
     wasteBankWallet: transaction.wasteBankWallet.toString(),
     user: transaction.user.toString(),
-    bottleWeightInKg: transaction.bottleWeightInKg,
-    paperWeightInKg: transaction.paperWeightInKg,
-    canWeightInKg: transaction.canWeightInKg,
-    timestamp: transaction.timestamp,
+    bottleWeightInKg: parseInt(transaction.bottleWeightInKg),
+    paperWeightInKg: parseInt(transaction.paperWeightInKg),
+    canWeightInKg: parseInt(transaction.canWeightInKg),
+    timestamp: parseInt(transaction.timestamp),
   }));
   return transactionList;
 }

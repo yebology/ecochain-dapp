@@ -3,14 +3,15 @@ import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { navList } from "../../utils/list";
 import { truncate } from "../../utils/helper";
 import { FaWallet } from "react-icons/fa";
+import { useWeb3Modal } from "@web3modal/ethers/react";
 
 type NavbarProps = {
   account: string;
-  onConnect: () => void;
 };
 
-export const Navbar: React.FC<NavbarProps> = ({ account, onConnect }) => {
+export const Navbar: React.FC<NavbarProps> = ({ account }) => {
   const [openNavigation, setOpenNavigation] = useState(false);
+  const { open } = useWeb3Modal();
 
   const toggleNavigation = () => {
     if (openNavigation) {
@@ -74,20 +75,15 @@ export const Navbar: React.FC<NavbarProps> = ({ account, onConnect }) => {
               ))}
             </div>
           </nav>
-          {account ? (
-            <button className="flex flex-row space-x-2 items-center duration-200 hover:scale-105 bg-primary-green p-3 shadow:lg rounded-xl">
-              <FaWallet color="white" />
-              <h1 className="font-bold">{truncate(account, 4, 4, 11)}</h1>
-            </button>
-          ) : (
-            <button
-              onClick={onConnect}
-              className="flex flex-row space-x-2 items-center duration-200 hover:scale-105 bg-primary-green p-3 shadow:lg rounded-xl"
-            >
-              <FaWallet color="white" />
-              <h1 className="font-bold">Connect Wallet</h1>
-            </button>
-          )}
+          <button
+            onClick={() => open()}
+            className="flex flex-row space-x-2 items-center duration-200 hover:scale-105 bg-primary-green p-3 shadow:lg rounded-xl"
+          >
+            <FaWallet color="white" />
+            <h1 className="font-bold">
+              {account ? truncate(account, 4, 4, 11) : "Connect Wallet"}
+            </h1>
+          </button>
           <button className="ml-auto lg:hidden px-3" onClick={toggleNavigation}>
             <svg
               className="overflow-visible"

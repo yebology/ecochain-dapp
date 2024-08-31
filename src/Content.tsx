@@ -6,35 +6,36 @@ import { NFT } from "./views/NFT";
 import { WasteBankView } from "./views/WasteBankView";
 import { TransactionView } from "./views/TransactionView";
 import { useEffect, useState } from "react";
-import { connectWallet } from "./services/wallet.ts";
 import { LoadingModal } from "./components/modal/LoadingModal.tsx";
+import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 
 export const Content = () => {
   const [account, setAccount] = useState("");
-
-  const onConnect = async () => {
-    await connectWallet();
-    setAccount(sessionStorage.getItem("account") || "");
-  };
+  const { address, isConnected } = useWeb3ModalAccount()
 
   useEffect(() => {
-    const account = sessionStorage.getItem("account");
-    if (account) {
-      setAccount(sessionStorage.getItem("account") || "");
+    if (isConnected && address) {
+      setAccount(address.toString());
     }
-  }, [account]);
+    else {
+      setAccount("")
+    }
+  }, [address, isConnected]);
 
   return (
     <div>
-      <Navbar onConnect={onConnect} account={account} />
-        <Routes>
-          <Route path="/" element={<Home account={account} />} />
-          <Route path="/nft" element={<NFT account={account} />} />
-          <Route path="/waste_bank" element={<WasteBankView />} />
-          <Route path="/transaction" element={<TransactionView account={account} />} />
-        </Routes>
-        <Footer />
-        <LoadingModal />
+      <Navbar account={account} />
+      <Routes>
+        <Route path="/" element={<Home account={account} />} />
+        <Route path="/nft" element={<NFT account={account} />} />
+        <Route path="/waste_bank" element={<WasteBankView />} />
+        <Route
+          path="/transaction"
+          element={<TransactionView account={account} />}
+        />
+      </Routes>
+      <Footer />
+      <LoadingModal />
     </div>
   );
 };

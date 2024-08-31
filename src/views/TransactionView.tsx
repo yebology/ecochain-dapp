@@ -12,32 +12,23 @@ export const TransactionView: React.FC<TransactionViewProps> = ({
   account,
 }) => {
   const [userTransactions, setUserTransactions] = useState<Transaction[]>([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
+        setGlobalState("loadingModal", "scale-100");
         const data = await getTransactions();
-        const filtered = data.filter(
-          (transaction: Transaction) => transaction.user === account
-        );
+        const filtered = data.filter((transaction: Transaction) => {
+          return transaction.user === account
+        });
         setUserTransactions(filtered);
-        setLoading(false);
-      } catch (error) {
+      } 
+      catch (error) {
         console.log(error);
       }
     };
     fetchData();
   }, [account]);
-
-  useEffect(() => {
-    if (loading) {
-      setGlobalState("loadingModal", "scale-100");
-    } else {
-      setGlobalState("loadingModal", "scale-0");
-    }
-  }, [loading]);
 
   return (
     <div className="relative mt-28 mx-10">

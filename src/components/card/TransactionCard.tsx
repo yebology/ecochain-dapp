@@ -8,7 +8,8 @@ import {
   FaMapMarkerAlt,
   FaCopy,
 } from "react-icons/fa";
-import { wasteBanks } from "../../utils/list";
+import { getWasteBanks } from "../../services/wasteBank";
+import { setGlobalState } from "../../utils/global";
 
 type TransactionCardProps = {
   data: Transaction;
@@ -18,28 +19,38 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({ data }) => {
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
 
-  
   const totalRecycledWeight =
-    data.bottleWeightInKg + data.canWeightInKg + data.paperWeightInKg;
+    (data.bottleWeightInKg * 10) + (data.canWeightInKg * 30) + (data.paperWeightInKg * 20);
 
-  const handleCopy = (wallet : string) => {
+  const handleCopy = (wallet: string) => {
     try {
-      navigator.clipboard.writeText(wallet)
-    }
-    catch (error) {
+      navigator.clipboard.writeText(wallet);
+    } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    if (data) {
-      const filtered: WasteBank | undefined = wasteBanks.find(
-        (wasteBank: WasteBank) => wasteBank.wallet === data.wasteBankWallet
-      );
-      if (filtered) {
-        setCountry(filtered.country);
-        setCity(filtered.city);
+    const fetchData = async () => {
+      try {
+        const wasteBanks = await getWasteBanks();
+        const filtered = wasteBanks.find(
+          (wasteBank: WasteBank) => wasteBank.wallet === data.wasteBankWallet
+        );
+        if (filtered) {
+          setCountry(filtered.country);
+          setCity(filtered.city);
+        }
+      } 
+      catch (error) {
+        console.log(error);
       }
+      finally {
+        setGlobalState("loadingModal", "scale-0");
+      }
+    };
+    if (data) {
+      fetchData();
     }
   }, [data]);
 
@@ -69,7 +80,10 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({ data }) => {
               <FaWallet className="text-indigo-500 mr-3" />
               <h5 className="font-bold">Waste Bank Wallet : </h5>
               <h5>{truncate(data.wasteBankWallet, 4, 4, 11)}</h5>
-              <FaCopy onClick={() => handleCopy(data.wasteBankWallet)} className="text-gray-500 ml-2" />
+              <FaCopy
+                onClick={() => handleCopy(data.wasteBankWallet)}
+                className="text-gray-500 ml-2"
+              />
             </div>
 
             <div className="text-n-7 flex flex-row space-x-1 my-2 items-center">
