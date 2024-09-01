@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { SearchBar } from "../components/bar/SearchBar";
-import { nftArtList } from "../utils/list";
 import { NFTArt } from "../utils/interface";
 import { NFTArtCard } from "../components/card/NFTArtCard";
 import { PurchaseConfirmationModal } from "../components/modal/PurchaseConfirmationModal";
 import { ReusableModal } from "../components/modal/ReusableModal";
 import not_found from "../assets/not_found.png";
 import { getUserBalance } from "../services/balance";
+import { setGlobalState } from "../utils/global";
+import { getNFTArts, swapTokenWithNFT } from "../services/nft";
 
 type NFTProps = {
   account: string
@@ -14,6 +15,7 @@ type NFTProps = {
 
 export const NFT : React.FC<NFTProps> = ({ account }) => {
   const [query, setQuery] = useState("");
+  const [nftData, setNFTData] = useState<NFTArt[]>([]);
   const [filteredNFTArt, setFilteredNFTArt] = useState<NFTArt[]>([]);
   const [userBalance, setUserBalance] = useState(0)
 
@@ -21,6 +23,8 @@ export const NFT : React.FC<NFTProps> = ({ account }) => {
   const [openSuccess, setOpenSuccess] = useState(false);
   const [openInsufficient, setOpenInsufficient] = useState(false);
   const [choosenIndex, setChoosenIndex] = useState(0);
+  const [hash, setHash] = useState("")
+  const [trigger, setTrigger] = useState(0);
 
   const onClick = (tokenId: number) => {
     setOpenConfirmation(true);
@@ -31,18 +35,32 @@ export const NFT : React.FC<NFTProps> = ({ account }) => {
     setOpenConfirmation(false);
   };
 
-  const onPurchaseConfirmation = () => {
-    // user balance
-    if (100 < nftArtList[choosenIndex].price) {
+  const onPurchaseConfirmation = async() => {
+    if (userBalance < nftData[choosenIndex].price) {
       setOpenConfirmation(false);
       setOpenInsufficient(true);
-    } else {
-      // logic
+    } 
+    else {
       setOpenConfirmation(false);
+      await processTransaction();
+    }
+  };
+
+  const processTransaction = async() => {
+    setGlobalState("loadingModal", "scale-100");
+    try {
+      const transaction = await swapTokenWithNFT(choosenIndex);
+      const transactionReceipt = await transaction.wait();
+      setHash(transactionReceipt.hash.toString());
+      setGlobalState("loadingModal", "scale-0");
       setOpenSuccess(true);
       setChoosenIndex(0);
     }
-  };
+    catch (error) {
+      console.log(error)
+      setGlobalState("loadingModal", "scale-0");
+    }
+  }
 
   const onCloseInsufficient = () => {
     setOpenInsufficient(false);
@@ -50,6 +68,7 @@ export const NFT : React.FC<NFTProps> = ({ account }) => {
 
   const onCloseSuccess = () => {
     setOpenSuccess(false);
+    setTrigger(1);
   };
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,13 +76,31 @@ export const NFT : React.FC<NFTProps> = ({ account }) => {
   };
 
   useEffect(() => {
-    if (nftArtList) {
-      const filteredData = nftArtList.filter((nftArt: NFTArt) =>
+    const fetchData = async () => {
+      try {
+        setGlobalState("loadingModal", "scale-100");
+        const data = await getNFTArts();  
+        const filtered = data.filter((nftArt : NFTArt) => (nftArt.isBought == false))  
+        setNFTData(filtered);
+      }
+      catch (error) {
+        console.log(error);
+      }
+      finally {
+        setGlobalState("loadingModal", "scale-0");
+      }
+    }
+    fetchData()
+  }, [trigger])
+
+  useEffect(() => {
+    if (nftData) {
+      const filteredData = nftData.filter((nftArt: NFTArt) =>
         nftArt.name.toLocaleLowerCase().includes(query.toLowerCase())
       );
       setFilteredNFTArt(filteredData);
     }
-  }, [query]);
+  }, [query, nftData]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,7 +112,7 @@ export const NFT : React.FC<NFTProps> = ({ account }) => {
       }
     };
     fetchData();
-  }, [account]);
+  }, [account, trigger]);
 
   return (
     <div className="relative mt-28 md:mx-10">
@@ -117,16 +154,17 @@ export const NFT : React.FC<NFTProps> = ({ account }) => {
         <PurchaseConfirmationModal
           onClose={onCloseConfirmation}
           onSubmit={onPurchaseConfirmation}
-          header={`Confirm purchase of ${nftArtList[choosenIndex].name} NFT?`}
-          content={`This will cost $RCYCL${nftArtList[choosenIndex].price}. Continue?`}
+          header={`Confirm purchase of ${nftData[choosenIndex].name} NFT?`}
+          content={`This will cost $RCYCL${nftData[choosenIndex].price}. Continue?`}
         />
       )}
       {openSuccess && (
         <ReusableModal
           onClose={onCloseSuccess}
-          message={"SuccessModal"}
+          message={"SwapModal"}
           header={"Purchase Complete!"}
           content={"Your item is now yours!"}
+          additional={hash}
         />
       )}
       {openInsufficient && (

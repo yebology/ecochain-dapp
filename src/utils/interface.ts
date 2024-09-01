@@ -15,7 +15,8 @@ export type NFTArt = {
     name: string,
     description: string,
     image: string,
-    price: number
+    price: number,
+    isBought: boolean
 }
 
 export type WasteBank = {

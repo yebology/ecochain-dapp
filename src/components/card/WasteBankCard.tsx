@@ -23,7 +23,7 @@ export const WasteBankCard: React.FC<WasteBankCardProps> = ({ data }) => {
       <div className="inner-content rounded-lg overflow-hidden">
         <div className="relative">
           <img
-            src="https://img.freepik.com/free-vector/hand-drawn-nft-style-ape-illustration_23-2149611030.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1724716800&semt=ais_hybrid"
+            src="https://ipfs.io/ipfs/QmbZ4XsP6MbSGBKJKtRpw4E8oeZfjyBF8596y31bAKWsjc"
             alt={data.city}
             className="rounded-t-lg h-48 w-full object-cover transition-transform duration-300 ease-out transform hover:scale-105"
           />

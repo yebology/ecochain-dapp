@@ -22,6 +22,9 @@ export const TransactionView: React.FC<TransactionViewProps> = ({
           return transaction.user === account
         });
         setUserTransactions(filtered);
+        if (userTransactions.length == 0) {
+          setGlobalState("loadingModal", "scale-0");
+        }
       } 
       catch (error) {
         console.log(error);

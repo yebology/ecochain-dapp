@@ -28,11 +28,11 @@ async function loadNFTArts() {
 
 function structuredNFTArts(nftArts: any) {
   const nftArtList = nftArts.map((nftArt: any) => ({
-    id: nftArt.id,
+    id: parseInt(nftArt.id),
     name: nftArt.name,
     description: nftArt.description,
     image: nftArt.image,
-    price: nftArt.price,
+    price: parseInt(nftArt.price),
     isBought: nftArt.isBought
   }));
   return nftArtList;
