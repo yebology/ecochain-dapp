@@ -1,50 +1,28 @@
-# React + TypeScript + Vite
+# EcoChain : Convert Trash into $RCYCL and Unlock Unique NFTs! 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## ✨ Overview
+Welcome to EcoChain, a Web3 platform created to address Indonesia's waste management issues! 🌏✨ EcoChain harnesses blockchain technology to convert waste into valuable tokens, allowing you to trade bottles, cans, and paper for $RCYCL tokens. ♻️ Use tokens to buy NFTs. 🔒 EcoChain is a secure, transparent platform on Ethereum network, driving sustainability and innovation. 🌐💡
 
-Currently, two official plugins are available:
+## 💡 Features
+- ♻️ Swap Trash for $RCYCL : Convert your collected waste into $RCYCL tokens at a nearby EcoChain waste bank. Our platform ensures a seamless and rewarding exchange process, making recycling both beneficial and incentivizing. 💰
+- 🎨 Swap $RCYCL for NFTs : Turn your $RCYCL tokens into unique NFTs. Enjoy a range of digital art and collectibles while supporting sustainable practices. 🎨
+- ⭐ Give Review : Share your experiences and review our website you’ve interacted with. Your feedback helps others make informed decisions and fosters a community of trust and transparency. 🌟
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Insights
+- 💻 dApp : [See the code](https://github.com/yebology/ecochain-dapp.git)
+- 🔧 Smart Contract :  [See the code](https://github.com/yebology/ecochain-smartcontract.git)
+- 🖼️ NFT Assets : [Explore the assets](https://github.com/yebology/ecochain-nft.git)
+- 📜 Contract Address : [View on Etherscan](https://sepolia.etherscan.io/address/0x5fB226F427B929549778aa49dAF4C96a9Fc31814)
+- 💎 OpenSea : [View on Opensea](https://testnets.opensea.io/collection/recycle-3)
+- 🎥 Demo Video : [Watch Demo Video](https://drive.google.com/file/d/1n_A3hw-s1J-mS1SUdm---U8sDX_hQHfF/view?usp=sharing)
+- 💰 Funding : [View Address](https://github.com/yebology/buildstationorg/blob/main/funding.json)
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## ⚙️ Tech Stack
+- 🖥️ Frontend : React (Typescript)
+- 🔧 Smart Contract Development : Foundry (Solidity)
+- 📜 Token Standards : ERC20 & ERC721
+- 🔗 Library : Ethers.js
+- 💳 Wallet Integration : WalletConnect
+- 🌐 IPFS Provider : Pinata
+- ⚡ API Provider : Alchemy
+- 🎨 Styling : TailwindCSS
